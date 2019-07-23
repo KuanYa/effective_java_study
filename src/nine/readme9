@@ -1,12 +1,10 @@
 title: 覆盖equals时总要覆盖hashCode方法
 
 一、原因:
-在每个覆盖了equals的方法中,必须覆盖hashCode方法,如果违反object.hashCode的约定,从而导致该类无法基于散列的集合正常工作,
-    包括 hashMap,HashSet,HashTable
+在每个覆盖了equals的方法中,必须覆盖hashCode方法,如果违反object.hashCode的约定,从而导致该类无法基于散列的集合正常工作,包括 hashMap,HashSet,HashTable
 
 二、hashCode约定
-1、在应用执行期间,只要对象的equals方法的比较操作所用的信息没有被修改,那么对于这同一个对象的多次调用,所返回的hashCode必须是用一个整数,
- 同一个应用程序的多次执行过程中,每次返回的整数可以不一致。
+1、在应用执行期间,只要对象的equals方法的比较操作所用的信息没有被修改,那么对于这同一个对象的多次调用,所返回的hashCode必须是同一个整数,同一个应用程序的多次执行过程中,每次返回的整数可以不一致。
 
 2、如果两个对象的equals(object)的方法是相等的,那么两个对象的hashCode值一定相等,返回相同的整数。
 
@@ -15,6 +13,7 @@ title: 覆盖equals时总要覆盖hashCode方法
 
 三、注意事项
 1、计算散列的方法 31*i == (i<<5) - i
-    int result = x ;// x值人选
+    i<<5 左移5位
+    int result = x ;// x值任选
     hashCode = 31*result + value;
 2、不要试图从散列吗计算中排除掉一个对象的关键部分来提高性能,可能会导致散列表慢到无法使用,散列函数映射到极少数的散列值,影响性能.

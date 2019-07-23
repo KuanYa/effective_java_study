@@ -52,4 +52,12 @@ public class PhoneNumber {
         }
         return result;
     }
+
+    /**
+     * 第10条中的建议,覆盖toString 方法
+     */
+    @Override
+    public String toString(){
+        return String.format("(%03d) %03d-%04d",areaCode,prefix,lineNumber);
+    }
 }

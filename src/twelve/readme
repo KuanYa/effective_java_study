@@ -1,0 +1,29 @@
+第12条:考虑实现Comparable接口
+总结如下
+一、方法：
+    compareTo 方法没有声明在Object中,相反,它是Comparable接口中唯一存在的方法。
+    compareTo方法不但允许进行简单的等同性比较,还是允许执行顺序比较。
+    例如：为实现Comparable接口的数组排序  Arrays.sort(a);
+
+二、返回值:
+    compareTo方法的通用约定与equals方法相似。
+    将这个对象与指定的对象比较时。当该对象小于、大于、等于执行对象时，分别返回 负整数、正整数、零。
+    如果对象与执行对象不能进行比较时，返回 ClassCastException
+
+三、通用约定：
+符号sgn表示数学中的 signum函数，它根据表达式的值为负值、正值、零 ，分别返回 -1、1、0
+    1、实现者必须保证所有的x和y有满足sgn(x.compareTo(y)) == -sgn(y.compareTo(x)),
+  这也意味着，当且仅当 y.compareTo(x)抛出异常时,x.compareTo(y) 也必须抛出异常。
+    2、实现这还必须满足传递性:(x.compareTo(y)>))&&(y.compareTo(z)>0) 那么，x.compareTo(z)>0
+    3、实现者必须确保 x.compareTo(y) == 0 暗示着 所有的 Z 都满足sgn(x.compareTo(z)) == sgn(y.compareTo(z))。
+    4、强烈建议(x.compareTo(y) ==0) == (x.equals(y)) 如果任何实现 Comparable 接口的类,违反了这个条件,都应该明确予以说明
+    推进使用这样的说法："注意：该类具有内在排序功能，但是与equals不一致"
+
+四、建议：
+    1、在通常情况下应该返回与equals方法一致的结果,如果遵守，则视为与 "equals一致",反之，顺序关系则为 "equals不一致"
+    例如： BigDecimal类,它的compareTo 与 equals 不一致
+          BigDecimal("1.0").equals(BigDecimal("1.00"))  false
+          BigDecimal("1,0").compareTo(BigDecimal(1.00)) trueq
+     如果没有实现Comparable 接口，或者需要使用一个非标准的排序关系,就可以使用一个现实的Comparator接口
+     例如：请在代码中查看
+     2、如果一个类有关键的域需要比较,那么按照最关键的域先开始比较

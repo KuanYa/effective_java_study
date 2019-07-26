@@ -10,5 +10,7 @@ public class TestMain9 {
         map.put(new PhoneNumber(707,867,5309),"白富宽");
         // 输出null 违反hashCode 约定
         System.out.println(map.get(new PhoneNumber(707,867,5309)));
+
+        String test = "{\"name\":\"baifukaun\"}";
     }
 }
